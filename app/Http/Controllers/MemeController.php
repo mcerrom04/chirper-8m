@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Meme;
 use Illuminate\Http\Request;
 
 class MemeController extends Controller
@@ -11,26 +12,11 @@ class MemeController extends Controller
      */
     public function index()
     {
-        $memes = [
-            [
-                'author' => 'Paco',
-                'message' => 'Meme del 8M',
-                'image_url' => 'https://cataas.com/cat',
-                'time' => '5 minutes ago'
-            ],
-            [
-                'author' => 'Pedro',
-                'message' => 'Otro meme del 8M',
-                'image_url' => 'https://api.memegen.link/images/buzz/memes/memes_everywhere.webp',
-                'time' => '10 minutes ago'
-            ],
-            [
-                'author' => 'Jose Antonio',
-                'message' => 'Un tercer meme del 8M',
-                'image_url' => 'https://cataas.com/cat',
-                'time' => '15 minutes ago'
-            ]
-        ];
+        $memes = Meme::with('user')
+            ->latest()
+            ->take(50)
+            ->get();
+
         return view('home', ['memes' => $memes]);
     }
 
