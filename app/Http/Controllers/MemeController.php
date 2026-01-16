@@ -42,11 +42,11 @@ class MemeController extends Controller
             'image_url.url' => 'La URL de la imagen debe ser válida.',
         ]);
 
-        $meme = new Meme();
-        $meme->message = $validated['message'];
-        $meme->image_url = $validated['image_url'] ?? null;
-        $meme->user_id = null; // anónimo por ahora
-        $meme->save();
+        // Create meme attached to authenticated user
+        auth()->user()->memes()->create([
+            'message' => $validated['message'],
+            'image_url' => $validated['image_url'] ?? null,
+        ]);
 
         return redirect('/')->with('success', 'Meme publicado correctamente. Gracias.');
     }
@@ -64,6 +64,7 @@ class MemeController extends Controller
      */
     public function edit(Meme $meme)
     {
+        $this->authorize('update', $meme);
         return view('memes.edit', compact('meme'));
     }
 
@@ -72,6 +73,7 @@ class MemeController extends Controller
      */
     public function update(Request $request, Meme $meme)
     {
+        $this->authorize('update', $meme);
         $validated = $request->validate([
             'message' => 'required|string|max:255',
             'image_url' => 'nullable|url|max:1000',
@@ -94,6 +96,7 @@ class MemeController extends Controller
      */
     public function destroy(Meme $meme)
     {
+        $this->authorize('delete', $meme);
         $meme->delete();
 
         return redirect('/')->with('success', 'Meme eliminado.');

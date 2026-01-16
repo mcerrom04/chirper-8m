@@ -35,15 +35,19 @@
                         @endif
                     </div>
 
-                    <div class="flex gap-1">
-                        <a href="/memes/{{ $meme->id }}/edit" class="btn btn-ghost btn-xs">Editar</a>
+                    @can('update', $meme)
+                        <div class="flex gap-1">
+                            <a href="/memes/{{ $meme->id }}/edit" class="btn btn-ghost btn-xs">Editar</a>
 
-                        <form method="POST" action="/memes/{{ $meme->id }}" onsubmit="return confirm('¿Seguro que quieres eliminar este meme?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-ghost btn-xs text-error">Eliminar</button>
-                        </form>
-                    </div>
+                            @can('delete', $meme)
+                                <form method="POST" action="/memes/{{ $meme->id }}" onsubmit="return confirm('¿Seguro que quieres eliminar este meme?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-ghost btn-xs text-error">Eliminar</button>
+                                </form>
+                            @endcan
+                        </div>
+                    @endcan
                 </div>
 
                 <p class="mt-2">{{ $meme->message }}</p>
