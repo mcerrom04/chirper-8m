@@ -6,6 +6,45 @@
     <div class="max-w-2xl mx-auto">
         <h1 class="text-3xl font-bold mt-8">Últimos Memes</h1>
 
+        <!-- Formulario para crear meme -->
+        <div class="card bg-base-100 shadow mt-8">
+            <div class="card-body">
+                <form method="POST" action="/memes">
+                    @csrf
+
+                    <div class="form-control w-full">
+                        <textarea
+                            name="message"
+                            placeholder="¿Qué quieres compartir sobre el 8M o la lucha contra la violencia de género?"
+                            class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror"
+                            rows="4"
+                            maxlength="255"
+                            required
+                        >{{ old('message') }}</textarea>
+
+                        @error('message')
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ $message }}</span>
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-control w-full mt-4">
+                        <input type="url" name="image_url" placeholder="URL de la imagen (opcional)" value="{{ old('image_url') }}" class="input input-bordered w-full @error('image_url') input-error @enderror">
+                        @error('image_url')
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ $message }}</span>
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mt-4 flex items-center justify-end">
+                        <button type="submit" class="btn btn-primary btn-sm">Publicar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="space-y-4 mt-8">
             @forelse ($memes as $meme)
                 <x-meme :meme="$meme" />

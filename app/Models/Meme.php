@@ -10,6 +10,7 @@ class Meme extends Model
     protected $fillable = [
         'image_url',
         'message',
+        'user_id',
     ];
 
     public function user(): BelongsTo
