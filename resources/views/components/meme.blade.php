@@ -112,7 +112,7 @@
 
                     <div class="flex justify-center pt-3 border-t border-base-300">
                         <button @click.stop="flipped = !flipped"
-                                class="btn btn-sm bg-gray-800 hover:bg-gray-900 text-white border-none">
+                                class="btn btn-sm bg-purple-700 hover:bg-purple-800 text-white border-none">
                             🔄 Girar
                         </button>
                     </div>
@@ -129,7 +129,7 @@
 
                     <div class="flex justify-center pt-3 mt-3 border-t border-base-300">
                         <button @click.stop="flipped = !flipped"
-                                class="btn btn-sm bg-gray-800 hover:bg-gray-900 text-white border-none">
+                                class="btn btn-sm bg-purple-700 hover:bg-purple-800 text-white border-none">
                             🔄 Girar
                         </button>
                     </div>

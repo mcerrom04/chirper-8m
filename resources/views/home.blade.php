@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="max-w-2xl mx-auto">
-        <h1 class="text-3xl font-bold mt-8">Últimos Memes</h1>
+        <h1 class="text-3xl font-bold mt-8 text-purple-700">🎗️ Últimos Memes contra la Violencia de Género</h1>
 
         <!-- Formulario para crear meme -->
         <div class="card bg-base-100 shadow mt-8">
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="mt-4 flex items-center justify-end">
-                        <button type="submit" class="btn btn-primary btn-sm">Publicar</button>
+                        <button type="submit" class="btn btn-sm bg-purple-700 hover:bg-purple-800 text-white border-none">Publicar</button>
                     </div>
                 </form>
             </div>

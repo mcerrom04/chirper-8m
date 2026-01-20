@@ -64,7 +64,7 @@
 
                     <div class="card-actions justify-between mt-4">
                         <a href="/" class="btn btn-ghost btn-sm">Cancelar</a>
-                        <button type="submit" class="btn btn-primary btn-sm">Actualizar</button>
+                        <button type="submit" class="btn btn-sm bg-purple-700 hover:bg-purple-800 text-white border-none">Actualizar</button>
                     </div>
                 </form>
             </div>
