@@ -4,9 +4,9 @@
     </x-slot:title>
 
     <div class="max-w-2xl mx-auto">
-        <h1 class="text-3xl font-bold mt-8">Editar Meme</h1>
+        <h1 class="text-xl mt-1 font-bold">Editar Meme</h1>
 
-        <div class="card bg-base-100 shadow mt-8">
+        <div class="card bg-base-100 mt-8">
             <div class="card-body">
                 <form method="POST" action="/memes/{{ $meme->id }}">
                     @csrf
