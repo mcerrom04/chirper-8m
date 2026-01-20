@@ -31,31 +31,32 @@ class MemeSeeder extends Seeder
             ])
             : User::take(3)->get();
 
-        // Deterministic list: each message has a dedicated image
+        // Memes/bulos específicos sobre el 8M y violencia de género
         $items = [
             [
-                'message' => 'Hoy recordamos a las víctimas de la violencia de género. #8M #NiUnaMenos',
-                'image_url' => 'https://cataas.com/cat/says/Recordamos%20a%20las%20víctimas'
+                'message' => 'La mayoría de las denuncias por violencia de género son falsas, solo quieren hundir al hombre.',
+                'image_url' => null,
+                'explicacion' => 'Según datos de la Fiscalía General del Estado (España), las denuncias falsas representan el 0,01% del total. De millones de denuncias presentadas desde 2009, la inmensa mayoría son verídicas o se archivan por falta de pruebas, no por ser falsas.'
             ],
             [
-                'message' => '8M: Solidaridad y lucha contra la violencia machista.',
-                'image_url' => 'https://api.memegen.link/images/buzz/8m/solidaridad.webp'
+                'message' => '¿Y para cuándo el día del hombre? ¿Por qué no existe?',
+                'image_url' => null,
+                'explicacion' => 'Sí existe. El Día Internacional del Hombre se celebra el 19 de noviembre. El 8-M tiene mayor repercusión mediática porque nace de una reivindicación histórica de derechos laborales y civiles que las mujeres no tenían.'
             ],
             [
-                'message' => 'No estás sola. Apoyemos a las supervivientes.',
-                'image_url' => 'https://cataas.com/cat/says/No%20estas%20sola'
+                'message' => 'La brecha salarial es un mito, cobran menos porque trabajan menos horas o eligen peores trabajos.',
+                'image_url' => null,
+                'explicacion' => 'Existe la brecha ajustada y la no ajustada. Incluso comparando puestos de igual valor, las mujeres en la UE ganan de media un 13% menos por hora que los hombres. Además, las mujeres ocupan mayoritariamente trabajos a tiempo parcial no por elección, sino por asumir los cuidados familiares (hijos/mayores).'
             ],
             [
-                'message' => 'La igualdad es imprescindible. #8M',
-                'image_url' => 'https://api.memegen.link/images/buzz/igualdad/igualdad.webp'
+                'message' => 'Ni machismo ni feminismo: igualdad.',
+                'image_url' => null,
+                'explicacion' => 'Es un error de concepto. El machismo es una conducta de prepotencia o discriminación hacia la mujer. El feminismo es, por definición de la RAE, el principio de igualdad de derechos de la mujer y el hombre. Por tanto, si quieres igualdad, la palabra correcta es feminismo. No son términos opuestos, sino distintos.'
             ],
             [
-                'message' => 'Rompe el silencio, denuncia la violencia de género.',
-                'image_url' => 'https://cataas.com/cat/says/Rompe%20el%20silencio'
-            ],
-            [
-                'message' => 'Educar para prevenir: la violencia no tiene excusa.',
-                'image_url' => 'https://api.memegen.link/images/buzz/educar/prevenir.webp'
+                'message' => 'La violencia no tiene género, las mujeres también pegan.',
+                'image_url' => null,
+                'explicacion' => 'La violencia doméstica existe en todas direcciones, pero la violencia de género es un tipo específico que se ejerce contra la mujer por el mero hecho de serlo, utilizada históricamente como herramienta de control. Las estadísticas de la ONU y la OMS muestran que una de cada tres mujeres en el mundo ha sufrido violencia física o sexual, mayoritariamente por parte de una pareja o expareja.'
             ],
         ];
 
@@ -63,21 +64,9 @@ class MemeSeeder extends Seeder
             $users->random()->memes()->create([
                 'message' => $item['message'],
                 'image_url' => $item['image_url'],
+                'explicacion' => $item['explicacion'],
                 'created_at' => now()->subMinutes(rand(5, 1440)),
             ]);
         }
-
-        // A couple of explicit anonymous memes with fixed images
-        Meme::create([
-            'user_id' => null,
-            'image_url' => 'https://cataas.com/cat/says/Anonimo%201',
-            'message' => '8M: Ni una menos. Solidaridad y memoria.'
-        ]);
-
-        Meme::create([
-            'user_id' => null,
-            'image_url' => 'https://api.memegen.link/images/buzz/anon/anon2.webp',
-            'message' => '8M: Ni una menos. Solidaridad y memoria.'
-        ]);
     }
 }

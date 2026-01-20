@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('memes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
-            $table->string('image_url');
-            $table->string('message', 255);
+            $table->string('image_url', 1000)->nullable();
+            $table->string('message', 255)->nullable();
+            $table->text('explicacion');
             $table->timestamps();
         });
     }

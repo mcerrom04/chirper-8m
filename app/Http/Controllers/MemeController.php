@@ -34,18 +34,26 @@ class MemeController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'message' => 'nullable|string|max:255',
             'image_url' => 'nullable|url|max:1000',
+            'explicacion' => 'required|string|max:1000',
         ], [
-            'message.required' => 'Escribe algo antes de publicar.',
             'message.max' => 'El mensaje no puede superar los 255 caracteres.',
             'image_url.url' => 'La URL de la imagen debe ser válida.',
+            'explicacion.required' => 'La explicación que desmiente el meme/bulo es obligatoria.',
+            'explicacion.max' => 'La explicación no puede superar los 1000 caracteres.',
         ]);
+
+        // Validar que al menos message o image_url esté presente
+        if (empty($validated['message']) && empty($validated['image_url'])) {
+            return back()->withErrors(['message' => 'Debes proporcionar un mensaje o una URL de imagen.'])->withInput();
+        }
 
         // Create meme attached to authenticated user
         auth()->user()->memes()->create([
-            'message' => $validated['message'],
+            'message' => $validated['message'] ?? null,
             'image_url' => $validated['image_url'] ?? null,
+            'explicacion' => $validated['explicacion'],
         ]);
 
         return redirect('/')->with('success', 'Meme publicado correctamente. Gracias.');
@@ -75,17 +83,25 @@ class MemeController extends Controller
     {
         $this->authorize('update', $meme);
         $validated = $request->validate([
-            'message' => 'required|string|max:255',
+            'message' => 'nullable|string|max:255',
             'image_url' => 'nullable|url|max:1000',
+            'explicacion' => 'required|string|max:1000',
         ], [
-            'message.required' => 'Escribe algo antes de publicar.',
             'message.max' => 'El mensaje no puede superar los 255 caracteres.',
             'image_url.url' => 'La URL de la imagen debe ser válida.',
+            'explicacion.required' => 'La explicación que desmiente el meme/bulo es obligatoria.',
+            'explicacion.max' => 'La explicación no puede superar los 1000 caracteres.',
         ]);
 
+        // Validar que al menos message o image_url esté presente
+        if (empty($validated['message']) && empty($validated['image_url'])) {
+            return back()->withErrors(['message' => 'Debes proporcionar un mensaje o una URL de imagen.'])->withInput();
+        }
+
         $meme->update([
-            'message' => $validated['message'],
+            'message' => $validated['message'] ?? null,
             'image_url' => $validated['image_url'] ?? null,
+            'explicacion' => $validated['explicacion'],
         ]);
 
         return redirect('/')->with('success', 'Meme actualizado correctamente.');

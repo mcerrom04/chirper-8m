@@ -9,17 +9,20 @@
         <!-- Formulario para crear meme -->
         <div class="card bg-base-100 shadow mt-8">
             <div class="card-body">
+                <h2 class="card-title text-lg">Publicar nuevo meme/bulo</h2>
                 <form method="POST" action="/memes">
                     @csrf
 
                     <div class="form-control w-full">
+                        <label class="label">
+                            <span class="label-text">Mensaje del meme/bulo (opcional si pones imagen)</span>
+                        </label>
                         <textarea
                             name="message"
-                            placeholder="¿Qué quieres compartir sobre el 8M o la lucha contra la violencia de género?"
+                            placeholder="Escribe el mensaje del meme o bulo..."
                             class="textarea textarea-bordered w-full resize-none @error('message') textarea-error @enderror"
-                            rows="4"
+                            rows="3"
                             maxlength="255"
-                            required
                         >{{ old('message') }}</textarea>
 
                         @error('message')
@@ -30,8 +33,31 @@
                     </div>
 
                     <div class="form-control w-full mt-4">
-                        <input type="url" name="image_url" placeholder="URL de la imagen (opcional)" value="{{ old('image_url') }}" class="input input-bordered w-full @error('image_url') input-error @enderror">
+                        <label class="label">
+                            <span class="label-text">URL de la imagen (opcional si pones mensaje)</span>
+                        </label>
+                        <input type="url" name="image_url" placeholder="https://ejemplo.com/imagen.jpg" value="{{ old('image_url') }}" class="input input-bordered w-full @error('image_url') input-error @enderror">
                         @error('image_url')
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ $message }}</span>
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-control w-full mt-4">
+                        <label class="label">
+                            <span class="label-text">Explicación que desmiente el meme/bulo *</span>
+                        </label>
+                        <textarea
+                            name="explicacion"
+                            placeholder="Explica por qué este meme o bulo es falso o engañoso..."
+                            class="textarea textarea-bordered w-full resize-none @error('explicacion') textarea-error @enderror"
+                            rows="4"
+                            maxlength="1000"
+                            required
+                        >{{ old('explicacion') }}</textarea>
+
+                        @error('explicacion')
                             <div class="label">
                                 <span class="label-text-alt text-error">{{ $message }}</span>
                             </div>

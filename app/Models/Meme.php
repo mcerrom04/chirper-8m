@@ -10,6 +10,7 @@ class Meme extends Model
     protected $fillable = [
         'image_url',
         'message',
+        'explicacion',
         'user_id',
     ];
 
